@@ -9,11 +9,12 @@ load_dotenv()
 
 client = OpenAI()
 
+
 def text_to_image_generation(prompt):
     response = client.images.generate(
-      model="dall-e-2",
+      model="dall-e-3",
       prompt=prompt,
-      size="256x256",
+      size="1024x1024",
       quality="standard",
       n=1,
       response_format="b64_json",
