@@ -1,1 +1,10 @@
 Flask==3.0.3
+Flask-Cors==5.0.0
+Flask-SocketIO==5.4.1
+opencv-python==4.10.0.84
+numpy==2.1.2
+python-dotenv==1.0.1
+python-engineio==4.9.1
+python-socketio==5.11.4
+requests==2.32.3
+simple-websocket==1.0.0
