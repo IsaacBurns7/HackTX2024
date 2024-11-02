@@ -1,9 +1,30 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Connection</title>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <header>
+            <h1>ISA Camera Monitoring - Optimized View</h1>
+            <p>You are currently viewing the Optimized Mode.</p>
+        </header>
 
-    </head>
-    <body>
-        <h1>Hello world!</h1>
-    </body>
+        <main>
+            <div class="video-screen">
+                <!-- Placeholder for the 800x450 video stream -->
+               <!-- <video id="remoteVideo" autoplay playsinline></video> -->
+               <img src="static/image.webp">
+            </div>
+
+            <div class="toggle-buttons">
+                <button id="optimized-btn" class="btn active">Optimized</button>
+                <a href="/comprehensiveindex" id="comprehensive-btn" class="btn">Comprehensive</a>
+            </div>
+        </main>
+    </div>
+</body>
 </html>
