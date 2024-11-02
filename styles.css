@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+  }
+  
+  /* Navbar */
+  .navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+  }
+  
+  .navbar .icon {
+    height: 50px;
+  }
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+  }
+  
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Main Content */
+  .main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 80px; /* To account for the fixed navbar */
+    margin-top: 40px;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .text-section {
+    flex: 1;
+    max-width: 50%;
+  }
+  
+  .text-section h1 {
+    font-size: 4em;
+    color: #333;
+    text-align: left;
+    word-wrap: break-word;
+    background: linear-gradient(270deg, #4a90e2, #6a5acd, #7b68ee, #8a2be2, #4a90e2);
+    background-size: 1000% 1000%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 10s ease infinite;
+  }
+  
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .icon-section .large-icon {
+    width: 300px;
+    height: auto;
+    max-width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .text-section h1 {
+      font-size: 2.5em; /* Adjust for smaller screens */
+    }
+  
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .main-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .text-section, .icon-section {
+      max-width: 100%;
+      padding: 10px;
+    }
+  }
+  
