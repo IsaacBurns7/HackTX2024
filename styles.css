@@ -1,108 +1,136 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-  }
-  
-  /* Navbar */
-  .navbar {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-  }
-  
-  .navbar .icon {
-    height: 50px;
-  }
-  
-  .nav-links {
-    display: flex;
-    list-style: none;
-  }
-  
-  .nav-links li {
-    margin: 0 15px;
-  }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-  }
-  
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Main Content */
-  .main-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    padding-top: 80px; /* To account for the fixed navbar */
-    margin-top: 40px;
-    flex-wrap: wrap;
-    padding: 20px;
-  }
-  
-  .text-section {
-    flex: 1;
-    max-width: 50%;
-  }
-  
-  .text-section h1 {
-    font-size: 4em;
-    color: #333;
-    text-align: left;
-    word-wrap: break-word;
-    background: linear-gradient(270deg, #4a90e2, #6a5acd, #7b68ee, #8a2be2, #4a90e2);
-    background-size: 1000% 1000%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientMove 10s ease infinite;
-  }
-  
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  .icon-section .large-icon {
-    width: 300px;
-    height: auto;
-    max-width: 100%;
-  }
-  
-  @media (max-width: 768px) {
-    .text-section h1 {
-      font-size: 2.5em; /* Adjust for smaller screens */
-    }
-  
-    .navbar {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .main-content {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .text-section, .icon-section {
-      max-width: 100%;
-      padding: 10px;
-    }
-  }
-  
+/* Base Styles */
+body {
+  font-family: 'Red Hat Display', sans-serif;
+  background: radial-gradient(circle, #8c62d4 0%, #6a40c0 40%, #4b2a8f 100%);
+  color: black;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header */
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.logo {
+  height: 70px;
+  width: auto;
+}
+
+/* Main Content Layout */
+.content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200px 30px;
+  box-sizing: border-box;
+}
+
+/* Welcome Text */
+.welcome-text {
+  max-width: 50%;
+  padding-left: 30px;
+  color: #fff;
+}
+
+/* Moving Gradient for SignQuest Text */
+.gradient-text {
+  font-size: 70px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.gradient-text span {
+  background: linear-gradient(270deg, #6adaff, #c07dff, #d88aff, #00bfff);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 8s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sign-In Box */
+.sign-in-box {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  display: inline-block;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"], input[type="password"] {
+  padding: 15px;
+  margin: 15px 0;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+/* Submit Button */
+.submit-btn {
+  background-color: rgb(101, 82, 129);
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.submit-btn:hover {
+  background-color: black;
+}
+
+/* Footer Styles */
+.footer {
+  width: 100%;
+  background-color: rgb(101, 82, 129);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  font-size: 14px;
+  position: absolute;
+  bottom: 0;
+}

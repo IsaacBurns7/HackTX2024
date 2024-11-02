@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASL Tutor</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignQuest - Sign In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <img src="path_to_icon.png" alt="ASL Tutor Icon" class="icon">
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Courses</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- Main Content -->
-  <div class="main-content">
-    <div class="text-section">
-      <h1>Let's Get You Started</h1>
-      <button href="asl.html">Get Started</button>
+    <div class="container">
+        <header>
+            <img src="noface.png" alt="SignQuest Logo" class="logo">
+        </header>
+        <main>
+            <div class="content">
+                <div class="welcome-text">
+                    <h1 class="gradient-text">Hello, Welcome to <span>SignQuest</span></h1>
+                    <p>Sign in to get started</p>
+                </div>
+                <div class="sign-in-box">
+                    <form id="sign-in-form" action="kahoot.html">
+                        <input type="text" id="username" placeholder="Username" required>
+                        <input type="password" id="password" placeholder="Password" required>
+                        <button type="submit" class="submit-btn">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-left">Privacy Policy</div>
+            <div class="footer-right">SignQuest © 2024</div>
+        </footer>
     </div>
-    <div class="icon-section">
-      <img src="path_to_icon.png" alt="ASL Tutor Icon Large" class="large-icon">
-    </div>
-  </div>
+    <script src="script.js"></script>
 </body>
 </html>
