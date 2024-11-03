@@ -8,6 +8,7 @@ import numpy as np
 import json
 import os
 import base64
+import gpt_api_calls
 
 app = Flask(__name__)
 CORS(app)
@@ -18,8 +19,10 @@ def generate_frames():
 
     while True:
         success, frame = camera.read()
+
         if not success:
             print('failed to get webcam')
+
             break
         else:
             ret, buffer = cv2.imencode('.jpg', frame)
@@ -28,7 +31,7 @@ def generate_frames():
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 @app.route('/video_feed')
 def video_feed():
-    return Response(generate_frames(), 
+    return Response(generate_frames(),
             mimetype = "multipart/x-mixed-replace; boundary=frame")
 
 @app.route('/')
@@ -54,8 +57,9 @@ def handle_upload_video():
     video = request.files['video']
 
     upload_folder = 'uploads'
-    
+
     # Check if the folder exists, and if not, create it
+
     if not os.path.exists(upload_folder):
         os.makedirs(upload_folder)
 
@@ -68,14 +72,23 @@ def handle_upload_video():
         "body": {
             "text": "dummy text of asl",
             "image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAgMBAPXnD3YAAAAASUVORK5CYII="
-            
+
         }
     }
 
     return jsonify(dummy)
 
-    
+
+@app.route("/get_stuff", methods= ["POST"])
+def get_stuff():
+    data = request.json
+    # Extract the input string
+    input_string = data['input_string']
+    j = gloss_to_sentence()
+    b64 = text_to_image_generation(j)
+    # Return the reversed string as a JSON response
+
+    return jsonify({"b64": b64})
 
 if __name__ == '__main__':
     app.run(debug=True)
-
