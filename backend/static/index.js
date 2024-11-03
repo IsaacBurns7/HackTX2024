@@ -5,6 +5,8 @@ let chunks = [];
 
 const startButton = document.getElementById('startBtn');
 const stopButton = document.getElementById('stopBtn');
+const manual = ["Aa", "Bb", "Cc"]
+let ct = 0
 
 const configuration = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
@@ -14,6 +16,7 @@ let localStream;
 let peerConnection;
 startButton.onclick = startRecording;
 stopButton.onclick = stopRecording;
+
 
 initCamera();
 
@@ -69,7 +72,9 @@ async function stopRecording(){
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
     }
-    //socket.emit('stop_stream'); // Notify server to stop saving -> this is actually just not needed
+    debug();
+
+        //socket.emit('stop_stream'); // Notify server to stop saving -> this is actually just not needed
 
 };
 
@@ -94,4 +99,21 @@ async function read_response_json(jason){
 
     //you guys figure out what to do with this image object 
     //make text object and figureo ut where to put
+}
+async function debug(){
+    ct += 1;
+    setTimeout(() =>{
+        document.getElementById("stopBtn").style.backgroundColor = "green";
+        document.getElementById("stopBtn").innerText = "Correct!";
+    }, "500")
+
+    setTimeout(() => {
+        if(ct == 3){
+            window.location.href += "href"
+            return
+        }
+        document.getElementById("process_ltr").innerText = manual[ct]
+        document.getElementById("stopBtn").style.backgroundColor = "red";
+        document.getElementById("stopBtn").innerText = "Stop";
+    }, "2000");
 }
