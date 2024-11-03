@@ -1,7 +1,10 @@
 const socket = io.connect('http://127.0.0.1:5000');
-const remoteVideo = document.getElementById('remoteVideo');
+const remoteVideo = document.getElementById('webcam');
 let mediaRecorder;
 const chunks = [];
+
+const startButton = document.getElementById('startBtn');
+const stopButton = document.getElementById('stopBtn');
 
 const configuration = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
@@ -11,8 +14,8 @@ let localStream;
 let peerConnection;
 
 async function stopCamera(){
-    document.getElementById('startBtn').disabled = false;
-    document.getElementById('stopBtn').disabled = true;
+    startButton.disabled = false;
+    stopButton.disabled = true;
     // Stop the MediaRecorder
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
@@ -69,12 +72,12 @@ async function startCamera() {
 
     mediaRecorder.start(100); // Send data every 100ms
     socket.emit('start_stream'); // Notify server to start saving
-    document.getElementById('startBtn').disabled = true;
-    document.getElementById('stopBtn').disabled = false;
+    startButton.disabled = true;
+    stopButton.disabled = false;
 }
 
-document.getElementById("startBtn").onclick = startCamera;
-document.getElementById('stopBtn').onclick = stopCamera;
+startButton.onclick = startCamera;
+stopButton.onclick = stopCamera;
 
 /*read json object:
 {
@@ -96,4 +99,10 @@ async function read_response_json(jason){
     //you guys figure out what to do with this image object 
     //make text object and figureo ut where to put 
 
+}
+
+function onIntroFinish() {
+    const body = document.getElementsByClassName("main-content")[0];
+    introClick.removeAttribute("hidden");
+    body.style.marginTop = "-10%";
 }
