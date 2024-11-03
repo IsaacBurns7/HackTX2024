@@ -1,3 +1,5 @@
+#RESEARCH LATER: how to use redirect to return json from another method
+
 #goal: return json object as 
 #{body: {text: "", image: "base64string -> turn to image"}}
 @app.route('/handle-video-to-text-and-image', methods=['POST'])
@@ -11,18 +13,3 @@ def handle_video_to_text_and_image():
         }
     }
     return jsonify(response)
-
-#receive video
-@app.route("/upload-video", methods = ["POST"])
-def handle_upload_video():
-    if 'video' not in request.files:
-        return jsonify({'message': 'NO VIDEO UPLOADED!!! :('})
-
-    video = request.files['video']
-
-    upload_folder = 'uploads'
-
-    video_path = os.path.join(upload_folder, video.filename)
-    video.save(video_path)
-    
-    return redirect(url_for("handle_video_to_text_and_image"))

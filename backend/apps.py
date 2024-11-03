@@ -92,21 +92,6 @@ def handle_upload_video():
 
     return jsonify(dummy)
 
-#goal: return json object as 
-#{body: {text: "", image: "base64string -> turn to image"}}
-#RESEARCH LATER: how to use redirect to return json from another method
-@app.route('/handle-video-to-text-and-image', methods=['POST'])
-def handle_video_to_text_and_image():
-    #dummy rn, do later when oscar's finished
-    response = {
-        "body": {
-            "text": "dummy text of asl",
-            "image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAgMBAPXnD3YAAAAASUVORK5CYII="
-            
-        }
-    }
-    return jsonify(response)
-
     
 
 if __name__ == '__main__':

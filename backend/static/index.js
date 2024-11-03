@@ -75,3 +75,25 @@ async function startCamera() {
 
 document.getElementById("startBtn").onclick = startCamera;
 document.getElementById('stopBtn').onclick = stopCamera;
+
+/*read json object:
+{
+    "body": {
+        "text": "dummy text of asl",
+        "image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAgMBAPXnD3YAAAAASUVORK5CYII="
+        
+    }
+}
+*/
+async function read_response_json(jason){
+    const body = jason.body;
+    const text = jason.text;
+    const base64String = jason.image;
+
+    const img = new Image();
+    img.src = "data:image/png;base64," + base64String;
+
+    //you guys figure out what to do with this image object 
+    //make text object and figureo ut where to put 
+
+}
