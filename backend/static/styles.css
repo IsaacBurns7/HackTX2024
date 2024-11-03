@@ -1,0 +1,159 @@
+/* Base Styles */
+body {
+    font-family: 'Red Hat Display', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: white; /* Default background color for the right side */
+    position: relative;
+  }
+  
+  /* Curved Background */
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 65%; /* Move curve more to the right */
+    height: 100%;
+    background: #8c62d4; /* Purple color */
+    clip-path: ellipse(85% 100% at 0% 50%);
+    z-index: -1;
+  }
+  
+  /* Container */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Header */
+  header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    box-sizing: border-box;
+  }
+  
+  /* Logo */
+  .logo {
+    height: 70px;
+    width: auto;
+  }
+  
+  /* Main Content Layout */
+  
+  /* Main Content Layout */
+  .content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 220px 50px;
+    box-sizing: border-box;
+    position: relative;
+    background-image: url('arcade.png');
+    background-size: 90%; /* Increase size of the background image */
+    background-repeat: no-repeat;
+    background-position: right -270px bottom -350px; /* Position image to the right and lower */
+  }
+  
+  /* Welcome Text */
+  .welcome-text {
+    max-width: 50%;
+    padding-left: 30px;
+    color: #fff;
+  }
+  
+  /* Gradient Text for SignQuest */
+  .gradient-text {
+    font-size: 70px;
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .text{
+    font-size: 32px;
+  }
+  
+  .gradient-text span {
+    background: linear-gradient(270deg, #6adaff, #c07dff, #d88aff, #00bfff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease infinite;
+  }
+  
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Sign-In Box */
+  .sign-in-box {
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    width: 400px;
+    display: inline-block;
+  }
+  
+  /* Form Styling */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input[type="text"], input[type="password"] {
+    padding: 15px;
+    margin: 15px 0;
+    font-size: 18px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: 15px;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+    background-color: rgb(101, 82, 129);
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .submit-btn:hover {
+    background-color: black;
+  }
+  
+  /* Footer Styles */
+  .footer {
+    width: 100%;
+    background-color: rgb(101, 82, 129);
+    color: white;
+    text-align: center;
+    padding: 1px;
+    box-sizing: border-box;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+  }
+  

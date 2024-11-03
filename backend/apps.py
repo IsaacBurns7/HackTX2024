@@ -66,7 +66,6 @@ def start_stream():
 def stop_stream():
     out.release()
     emit('stream_stopped')
-
 #receive video
 @app.route("/upload-video", methods = ["POST"])
 def handle_upload_video():

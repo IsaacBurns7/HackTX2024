@@ -1,7 +1,7 @@
 const socket = io.connect('http://127.0.0.1:5000');
 const remoteVideo = document.getElementById('webcam');
 let mediaRecorder;
-const chunks = [];
+let chunks = [];
 
 const startButton = document.getElementById('startBtn');
 const stopButton = document.getElementById('stopBtn');
@@ -12,37 +12,17 @@ const configuration = {
 
 let localStream;
 let peerConnection;
+startButton.onclick = startRecording;
+stopButton.onclick = stopRecording;
 
-async function stopCamera(){
-    startButton.disabled = false;
-    stopButton.disabled = true;
-    // Stop the MediaRecorder
-    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
-    }
-    
-    // Stop the video stream tracks
-    if (localStream) {
-        localStream.getTracks().forEach(track => track.stop());
-    }
-    
-    // Remove the video stream from the video element
-    remoteVideo.srcObject = null;
-    
-    // Notify the server to stop saving the stream
-    socket.emit('stop_stream');
-};
+initCamera();
 
-
-// Get user media and start the WebRTC connection
-async function startCamera() {
+async function initCamera(){
     try {
-        localStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true ,audio: true });
     } catch (error){
         alert("Could not connect camera...")
     }
-    remoteVideo.srcObject = localStream;
-    let chunks = [];
 
     mediaRecorder = new MediaRecorder(localStream);
     mediaRecorder.ondataavailable = (event) => {
@@ -50,15 +30,16 @@ async function startCamera() {
             // Send the video data to the server
             socket.emit('video_stream', event.data);
             chunks.push(event.data);
+            console.log('adding to chunks!');
         }
     };
-    mediaRecorder.onstop = function(){
-        const blob = new Blob(chunks, {type: 'video/webm'}); //not sure if this is spaghetti
-        chunks = [];
-    
+    remoteVideo.srcObject = localStream;
+
+    mediaRecorder.onstop = function() {
+        const blob = new Blob(chunks, {type: 'video/webm'}); //not sure if this is spaghetti    
         const formData = new FormData();
         formData.append('video', blob, 'recorded_video.webm');
-    
+        console.log("about to upload video!");
         fetch('/upload-video', {
             method: 'POST',
             body: formData
@@ -68,16 +49,29 @@ async function startCamera() {
         }).catch(error => {
             console.error("ERROR! while receiving response from /upload-video\n", error);
         });
+        chunks = [];
+        console.log("chunks reset!");
     };
-
-    mediaRecorder.start(100); // Send data every 100ms
-    socket.emit('start_stream'); // Notify server to start saving
-    startButton.disabled = true;
-    stopButton.disabled = false;
 }
 
-startButton.onclick = startCamera;
-stopButton.onclick = stopCamera;
+// Get user media and start the WebRTC connection
+async function startRecording() {
+    mediaRecorder.start(100); // Send data every 100ms
+    socket.emit('start_stream'); // Notify server to start saving
+    document.getElementById('startBtn').disabled = true;
+    document.getElementById('stopBtn').disabled = false;
+}
+
+async function stopRecording(){
+    document.getElementById('startBtn').disabled = false;
+    document.getElementById('stopBtn').disabled = true;
+    // Stop the MediaRecorder
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+    }
+    socket.emit('stop_stream'); // Notify server to start saving
+
+};
 
 /*read json object:
 {
@@ -100,10 +94,4 @@ async function read_response_json(jason){
 
     //you guys figure out what to do with this image object 
     //make text object and figureo ut where to put
-}
-
-function onIntroFinish() {
-    const body = document.getElementsByClassName("main-content")[0];
-    introClick.removeAttribute("hidden");
-    body.style.marginTop = "-10%";
 }
