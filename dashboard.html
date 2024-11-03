@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignQuest - Progress Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo and Page Title -->
+        <header>
+            <img src="icon.png" alt="SignQuest Logo" class="logo">
+            <h1>Progress Dashboard</h1>
+        </header>
+        
+        <!-- Main Content -->
+        <main>
+            <div class="content">
+                <div class="welcome-text">
+                    <h2 class="gradient-text">Welcome, Parents & Teachers</h2>
+                    <p class="text">Monitor the child’s progress, and explore learning paths to support their ASL journey.</p>
+                </div>
+
+                <!-- Progress Overview Section -->
+                <div class="progress-overview">
+                    <h3>Overall Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 70%;">70%</div> <!-- Example progress percentage -->
+                    </div>
+                    <p>Current Level: Intermediate</p>
+                </div>
+
+                <!-- Learning Path Options -->
+                <div class="learning-paths">
+                    <h3>Select a Learning Path</h3>
+                    <div class="path-buttons">
+                        <button class="path-btn" onclick="window.location.href='beginner_path.html'">Beginner Path</button>
+                        <button class="path-btn" onclick="window.location.href='intermediate_path.html'">Intermediate Path</button>
+                        <button class="path-btn" onclick="window.location.href='advanced_path.html'">Advanced Path</button>
+                    </div>
+                </div>
+
+                <!-- Additional Resources Section -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p align="right">SignQuest © 2024</p>
+        </footer>
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>
