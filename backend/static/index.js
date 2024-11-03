@@ -28,7 +28,7 @@ async function initCamera(){
     mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
             // Send the video data to the server
-            socket.emit('video_stream', event.data);
+            //socket.emit('video_stream', event.data); - also not needed
             chunks.push(event.data);
             console.log('adding to chunks!');
         }
@@ -57,7 +57,7 @@ async function initCamera(){
 // Get user media and start the WebRTC connection
 async function startRecording() {
     mediaRecorder.start(100); // Send data every 100ms
-    socket.emit('start_stream'); // Notify server to start saving
+    //socket.emit('start_stream'); // Notify server to start saving x-> this is actually just not needed
     document.getElementById('startBtn').disabled = true;
     document.getElementById('stopBtn').disabled = false;
 }
@@ -69,7 +69,7 @@ async function stopRecording(){
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
     }
-    socket.emit('stop_stream'); // Notify server to start saving
+    //socket.emit('stop_stream'); // Notify server to stop saving -> this is actually just not needed
 
 };
 

@@ -45,27 +45,6 @@ def handle_answer(answer):
 def handle_candidate(candidate):
     emit('candidate', candidate, broadcast=True, include_self=False)
 
-@socketio.on('video_stream')
-def handle_video_stream(data):
-    #decode image
-    np_array = np.frombuffer(data, np.uint8)
-    frame = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
-
-    #save frame as video
-    if frame is not None:
-        out.write(frame)
-
-@socketio.on('start_stream')
-def start_stream():
-    global out
-    #create videowriter object to save video
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = cv2.VideoWriter("output.avi", fourcc, 20.0, (640, 480))
-
-@socketio.on('stop_stream')
-def stop_stream():
-    out.release()
-    emit('stream_stopped')
 #receive video
 @app.route("/upload-video", methods = ["POST"])
 def handle_upload_video():
