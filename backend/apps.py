@@ -1,11 +1,17 @@
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, jsonify
 from flask_socketio import SocketIO, emit
 
 from flask_cors import CORS
+import cv2
+from dotenv import load_dotenv
+import numpy as np
+import json
+import os
+import base64
 
 app = Flask(__name__)
 CORS(app)
-socket_io
+socketio = SocketIO(app)
 
 def generate_frames():
     camera = cv2.VideoCapture(0)
@@ -73,16 +79,36 @@ def handle_upload_video():
 
     video_path = os.path.join(upload_folder, video.filename)
     video.save(video_path)
-    
 
-    return redirect(url_for("handle_video_to_text_and_image"))
+    #{body: {text: "", image: "base64string -> turn to image"}}
+
+    dummy = {
+        "body": {
+            "text": "dummy text of asl",
+            "image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAgMBAPXnD3YAAAAASUVORK5CYII="
+            
+        }
+    }
+
+    return jsonify(dummy)
 
 #goal: return json object as 
-#{body: {text: "", image: ""}}
+#{body: {text: "", image: "base64string -> turn to image"}}
+#RESEARCH LATER: how to use redirect to return json from another method
 @app.route('/handle-video-to-text-and-image', methods=['POST'])
 def handle_video_to_text_and_image():
-    
+    #dummy rn, do later when oscar's finished
+    response = {
+        "body": {
+            "text": "dummy text of asl",
+            "image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAgMBAPXnD3YAAAAASUVORK5CYII="
+            
+        }
+    }
+    return jsonify(response)
+
     
 
 if __name__ == '__main__':
     app.run(debug=True)
+

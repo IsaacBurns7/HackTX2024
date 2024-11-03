@@ -1,1 +1,39 @@
 js/css goes here
+
+//stop here
+
+/*
+function get_image_base64(){
+    const prompt = document.getElementById('promptInput').value;
+    fetch('/generate-image-base64',{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({prompt: prompt})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('outputting >_<')
+        if(data.image){
+            const base64String = data.image_data;
+
+            const img = new Image();
+            img.src = "data:image/png;base64," + base64String;
+
+            container.innerHTML = '';
+            document.getElementById('image-container').appendChild(img);
+        }else{
+            console.error("data.image DOES NOT EXIST.", data.message);
+        }
+    })
+    .catch(error => {
+        console.error("error fetching the base64 image: ", error);
+    })
+    /*
+    .finally(() => {
+        // Schedule the next fetch after a delay
+        setTimeout(get_base64_image, 5000); // Adjust the delay as needed
+    });
+    */
+//}
