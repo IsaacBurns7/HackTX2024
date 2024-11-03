@@ -27,10 +27,49 @@ async function startCamera() {
             socket.emit('video_stream', event.data);
         }
     };
+    mediaRecorder.onstop = function(){
+        const blob = new Blob(chunks, {type: 'video/webm'}); //not sure if this is spaghetti
+        chunks = [];
+    
+        const formData = new FormData();
+        formData.append('video', blob, 'recorded_video.webm');
+    
+        fetch('/upload-video', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+        .then(result => {
+            console.log("SUCESS: ", result);
+        }).catch(error => {
+            console.error("ERROR! while receiving response from /upload-video\n", error);
+        });
+    };
 
     mediaRecorder.start(100); // Send data every 100ms
     socket.emit('start_stream'); // Notify server to start saving
+    document.getElementById('startBtn').disabled = true;
+    document.getElementById('stopBtn').disabled = false;
 }
+
+async function stopCamera(){
+    document.getElementById('startBtn').disabled = false;
+    document.getElementById('stopBtn').disabled = true;
+    // Stop the MediaRecorder
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+    }
+    
+    // Stop the video stream tracks
+    if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+    }
+    
+    // Remove the video stream from the video element
+    remoteVideo.srcObject = null;
+    
+    // Notify the server to stop saving the stream
+    socket.emit('stop_stream');
+};
 
 document.getElementById("startBtn").onclick = startCamera;
 document.getElementById('stopBtn').onclick = stopCamera;
