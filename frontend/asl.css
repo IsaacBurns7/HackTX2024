@@ -1,0 +1,153 @@
+html, body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+/* Navbar
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+}
+
+.navbar .icon {
+  height: 50px;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+} */
+
+/* Main Content */
+.main-content {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  height: 75vh;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 98%;
+  margin-top: 10%;
+  transition: 1s ease;
+}
+
+.text-section {
+  flex: 1;
+  max-width: 50%;
+}
+
+.text-section h1 {
+  margin-top: 15%;
+  font-size: 4em;
+  text-align: center;
+  word-wrap: break-word;
+  background: #fff;
+  justify-content: center;
+  display: flex;
+  margin-right: 10%;
+  background-size: 1000% 1000%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 10s ease infinite;
+}
+
+.video {
+  margin-top: 5%;
+  height: 60vh;
+  width: 100%;
+  border-radius: 25px;
+  box-sizing: border-box;
+  object-fit: cover;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 8px 22px 0 rgba(0, 0, 0, 0.5);
+}
+
+.bar-border {
+  width: 100%;              
+  height: 25px;            
+  background-color: #e0e0e0; 
+  border-radius: 12px; 
+  overflow: hidden;        
+  margin: 20px 0;   
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);       
+}
+
+.bar {
+  height: 100%;             
+  width: 0%;                  
+  background-color: #4caf50;  
+  border-radius: 12px 0 0 12px;
+  transition: width 0.3s ease;
+}
+
+.right-con {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  margin-right: 0;
+  width: 50%;
+}
+
+.flexcon {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3em;
+}
+
+.start {
+  position: fixed;
+  background-color: rgb(182, 133, 255); /* Primary color */
+  color: white;
+  padding: 12px 24px; /* Spacing */
+  font-size: 16px; /* Text size */
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; /* Smooth animations */
+}
+
+.start:hover {
+  background-color:rgb(182, 133, 255); /* Darker shade on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow on hover */
+}
+
+.start:active {
+  transform: scale(0.97); /* Slight "press" effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+
+.slide-up {
+  position: fixed;
+  bottom: 5rem;
+  animation: 1s slide-up ease;
+}
+
+@keyframes slide-up {
+  from {
+    bottom: -50px;
+  }
+  to {
+    bottom: 5rem;
+  }
+}
