@@ -96,7 +96,8 @@ html, body {
   border-radius: 12px; 
   overflow: hidden;        
   margin: 20px 0;   
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);       
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);     
+  transition: all 0.5s ease;  
 }
 
 .bar {
@@ -104,7 +105,8 @@ html, body {
   width: 0%;                  
   background-color: #4caf50;  
   border-radius: 12px 0 0 12px;
-  transition: width 0.3s ease;
+  transition: width 0.3s ease opacity 0.5s ease;
+  opacity: 1;
 }
 
 .right-con {
@@ -186,7 +188,7 @@ html, body {
   border: none;
   border-radius: 20px; /* Rounded corners */
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; /* Smooth animations */
+  transition: all 0.25s; /* Smooth animations */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   width: 35%;
   font-family: 'Red Hat Display', sans-serif;
@@ -198,4 +200,20 @@ html, body {
 
 #stopBtn {
   background-color: red; /* Primary color */
+}
+
+/* Loader styles */
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3; /* Light color for background ring */
+  border-top: 5px solid #3498db; /* Dark color for spinning part */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
