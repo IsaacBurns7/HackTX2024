@@ -1,5 +1,6 @@
 const socket = io.connect('http://127.0.0.1:5000');
 const remoteVideo = document.getElementById('webcam');
+let intro = false;
 let mediaRecorder;
 let chunks = [];
 
@@ -15,7 +16,7 @@ let peerConnection;
 startButton.onclick = startRecording;
 stopButton.onclick = stopRecording;
 
-initCamera();
+// initCamera();
 
 async function initCamera(){
     try {
@@ -56,6 +57,7 @@ async function initCamera(){
 
 // Get user media and start the WebRTC connection
 async function startRecording() {
+    console.log("works");
     mediaRecorder.start(100); // Send data every 100ms
     //socket.emit('start_stream'); // Notify server to start saving x-> this is actually just not needed
     document.getElementById('startBtn').disabled = true;
@@ -69,8 +71,17 @@ async function stopRecording(){
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
     }
-    //socket.emit('stop_stream'); // Notify server to stop saving -> this is actually just not needed
 
+    if (window.location.href.includes("generation")) {
+        const con = document.getElementsByClassName("right-con")[0];
+        const div = document.createElement("div");
+        div.className = "loader";
+        con.replaceChild(div, remoteVideo);
+        setTimeout(() => {
+            con.replaceChild(remoteVideo, div);
+        }, 1500);
+    }
+    //socket.emit('stop_stream'); // Notify server to stop saving -> this is actually just not needed
 };
 
 /*read json object:
@@ -95,3 +106,24 @@ async function read_response_json(jason){
     //you guys figure out what to do with this image object 
     //make text object and figureo ut where to put
 }
+
+function onIntroFinish() {
+    const body = document.getElementsByClassName("main-content")[0];
+    const buttonCon = document.getElementsByClassName("button-con")[0];
+    if (window.location.href.includes("phrase")) {
+        const introClick = document.getElementById("finish");
+        introClick.removeAttribute("hidden");
+    }
+    body.style.marginTop = "5%";
+
+    buttonCon.removeAttribute("hidden");
+    startButton.removeAttribute("hidden");
+    stopButton.removeAttribute("hidden");
+}
+
+async function run() {
+    await initCamera();
+    onIntroFinish();
+}
+
+run();

@@ -69,9 +69,9 @@ header {
 
 .arcade {
   position: absolute;
-  margin-right: 10px;
-  width: 100px;
-  padding: 0px;
+  bottom: -400%;
+  right: -125%;
+  z-index: -1;
 }
 
 /* Welcome Text */
@@ -109,6 +109,7 @@ header {
 
 /* Sign-In Box */
 .sign-in-box {
+  position: relative;
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
   padding: 20px;

@@ -34,6 +34,12 @@ def video_feed():
 @app.route('/')
 def index():
     return render_template('index.html')
+@app.route("/generation")
+def generation():
+    return render_template('generation.html')
+@app.route("/phrase")
+def phrase():
+    return render_template('phrase.html')
 
 @socketio.on('offer')
 def handle_offer(offer):
