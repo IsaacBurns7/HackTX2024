@@ -6,6 +6,8 @@ let chunks = [];
 
 const startButton = document.getElementById('startBtn');
 const stopButton = document.getElementById('stopBtn');
+const manual = ["Aa", "Bb", "Cc"]
+let ct = 0
 
 const configuration = {
     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
@@ -16,7 +18,8 @@ let peerConnection;
 startButton.onclick = startRecording;
 stopButton.onclick = stopRecording;
 
-// initCamera();
+
+initCamera();
 
 async function initCamera(){
     try {
@@ -71,6 +74,10 @@ async function stopRecording(){
     if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
     }
+    if (!window.location.href.includes("generation"))
+        debug();
+
+        //socket.emit('stop_stream'); // Notify server to stop saving -> this is actually just not needed
 
     if (window.location.href.includes("generation")) {
         const con = document.getElementsByClassName("right-con")[0];
@@ -113,6 +120,9 @@ function onIntroFinish() {
     if (window.location.href.includes("phrase")) {
         const introClick = document.getElementById("finish");
         introClick.removeAttribute("hidden");
+        introClick.addEventListener("click", () => {
+            window.location.href = "/generation";
+        });
     }
     body.style.marginTop = "5%";
 
@@ -127,3 +137,21 @@ async function run() {
 }
 
 run();
+
+async function debug() {
+    ct += 1;
+    setTimeout(() =>{
+        document.getElementById("stopBtn").style.backgroundColor = "green";
+        document.getElementById("stopBtn").innerText = "Correct!";
+    }, "500")
+
+    setTimeout(() => {
+        if(ct == 3){
+            window.location.href += "phrase"
+            return
+        }
+        document.getElementById("process_ltr").innerText = manual[ct]
+        document.getElementById("stopBtn").style.backgroundColor = "red";
+        document.getElementById("stopBtn").innerText = "Stop";
+    }, "2000");
+}
