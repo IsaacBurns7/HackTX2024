@@ -8,7 +8,7 @@ import numpy as np
 import json
 import os
 import base64
-import gpt_api_calls
+import gpt_api_calls as gpt
 
 app = Flask(__name__)
 CORS(app)
@@ -90,8 +90,8 @@ def get_stuff():
     data = request.json
     # Extract the input string
     input_string = data['input_string']
-    j = gloss_to_sentence()
-    b64 = text_to_image_generation(j)
+    j = gpt.gloss_to_sentence(input_string)
+    b64 = gpt.text_to_image_generation(j)
     # Return the reversed string as a JSON response
 
     return jsonify({"b64": b64})

@@ -17,6 +17,9 @@ let localStream;
 let peerConnection;
 startButton.onclick = startRecording;
 stopButton.onclick = stopRecording;
+const gen_data_asdf = {
+        'input_string': 'dinosaur eating bread',
+    };
 
 
 initCamera();
@@ -84,22 +87,52 @@ async function stopRecording(){
         const div = document.createElement("div");
         div.className = "loader";
         con.replaceChild(div, remoteVideo);
-        setTimeout(() => {
+
+
+
+        let data = gen_data_asdf
+        fetch('/get_stuff', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
             con.replaceChild(remoteVideo, div);
-        }, 1500);
+            console.log(data)
+            console.log(typeof data)
+            let base64String = data['b64']
+
+
+            const imgElement = document.createElement('img');
+            imgElement.alt = 'Base64 Image';
+
+            // Set the src attribute with the data URL
+            imgElement.src = `data:image/png;base64,${base64String}`;
+
+            // Append the image to the body (or another element)
+            document.body.appendChild(imgElement);
+            document.body.removeChild(document.getElementsByClassName("right-con")[0])
+            
+
+
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
     }
     //socket.emit('stop_stream'); // Notify server to stop saving -> this is actually just not needed
 };
 
-/*read json object:
-{
-    "body": {
-        "text": "dummy text of asl",
-        "image": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAgMBAPXnD3YAAAAASUVORK5CYII="
-        
-    }
-}
-*/
 async function read_response_json(jason){
     const body = jason.body;
     const text = body.text;
