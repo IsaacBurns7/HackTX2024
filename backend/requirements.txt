@@ -8,3 +8,4 @@ python-engineio==4.9.1
 python-socketio==5.11.4
 requests==2.32.3
 simple-websocket==1.0.0
+flask_wtf==1.2.2

@@ -10,6 +10,14 @@ const configuration = {
 let localStream;
 let peerConnection;
 
+const base64String = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGBgAAAABQABDQottgAAAABJRU5ErkJggg==';
+
+const img = new Image();
+img.src = 'data:image/png;base64,' + base64String;
+
+// Append the image to a container element
+document.getElementById('image-container').appendChild(img);
+
 async function stopCamera(){
     document.getElementById('startBtn').disabled = false;
     document.getElementById('stopBtn').disabled = true;
@@ -76,10 +84,18 @@ async function startCamera() {
 document.getElementById("startBtn").onclick = startCamera;
 document.getElementById('stopBtn').onclick = stopCamera;
 
-function get_base64_image(){
-    fetch('/get-image-base64')
+function get_image_base64(){
+    const prompt = document.getElementById('promptInput').value;
+    fetch('/generate-image-base64',{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({prompt: prompt})
+    })
     .then(response => response.json())
     .then(data => {
+        console.log('outputting >_<')
         if(data.image_data){
             const base64String = data.image_data;
 
@@ -94,12 +110,13 @@ function get_base64_image(){
     })
     .catch(error => {
         console.error("error fetching the base64 image: ", error);
-    }).finally(() => {
+    })
+    /*
+    .finally(() => {
         // Schedule the next fetch after a delay
         setTimeout(get_base64_image, 5000); // Adjust the delay as needed
     });
+    */
 }
 
-window.onload = function() {
-    get_base64_image();
-};
+document.getElementById("generateBtn").onclick = get_image_base64;

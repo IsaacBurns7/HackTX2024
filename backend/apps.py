@@ -1,10 +1,11 @@
 #responsibilities
 #interpret base64 images from oscar into real images, send to frontend
 
-from flask import Flask, render_template, Response, request, jsonify
+from flask import Flask, render_template, Response, request, jsonify, redirect, url_for
 from flask_socketio import SocketIO, emit
 
 from flask_cors import CORS
+
 import cv2
 from dotenv import load_dotenv
 import numpy as np
@@ -13,13 +14,18 @@ import os
 import base64
 #import C1
 
+import sys
+sys.path.append('../')        
+from gpt_api_calls import text_to_image_generation  # Import the function
+
 #default behavior
-stored_base64_string = 
+stored_base64_string = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQI12NgYGBgAAAABQABDQottgAAAABJRU5ErkJggg=="
 
 
 load_dotenv(".env")
 app = Flask(__name__)
 CORS(app)
+#CORS(app, resources={r"/*": {"origins": "*"}})
 socketio = SocketIO(app)
 
 def generate_frames():
@@ -76,6 +82,7 @@ def stop_stream():
     out.release()
     emit('stream_stopped')
 
+#receive video
 @app.route("/upload-video", methods = ["POST"])
 def handle_upload_video():
     if 'video' not in request.files:
@@ -88,35 +95,25 @@ def handle_upload_video():
     video_path = os.path.join(upload_folder, video.filename)
     video.save(video_path)
     
-    return jsonify({'message': 'message uploaded successfully!'})
+    return redirect(url_for())
 
 
 #@app.route("/get-video", methods = ["GET"])
 #def give_video():
 #    return jsonify(video)
 
-@app.route("/upload-image-base64", methods = ["POST"])
-def handle_upload_image_base64():
+#creates b64 string given a prompt from frontend
+@app.route('/get-image-base64', methods=['POST'])
+def handle_generate_image_base64():
     data = request.get_json()
-    base64_string = data.get('image_data', '')
-    if base64_string:
-        # You can process or store the base64 string as needed
-        # For example, save it to a variable or database
-        # Here, we'll store it in a global variable (not recommended for production)
-        global stored_base64_string
-        stored_base64_string = base64_string
-        return jsonify({'status': 'success'}), 200
+    try:
+        b64_string = text_to_image_generation(prompt)
+        print(b64_string)
+        return jsonify({"image_data": b64_string}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     else:
-        return jsonify({'status': 'error', 'message': 'No base64 string received'}), 400
-    
-@app.route("/get-image-base64", methods = )
-def handle_get_image_base64():
-    global stored_base64_string
-    if stored_base64_string:
-        return jsonify({'image_data': stored_base64_string}), 200
-    else:
-        return jsonify({'status': 'error', 'message': 'No image data available'}), 404
-
+        return jsonify({'error': 'No prompt provided'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
