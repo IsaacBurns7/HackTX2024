@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebRTC Connection</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://fonts.googleapis.com/css?family=Red Hat Display' rel='stylesheet'>
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../static/asl.css">
+  <title>Document</title>
 </head>
-<body>
-    <div class="overlay"></div>
-    <div class="container">
-        <header>
-            <h1>ISA Camera Monitoring - Optimized View</h1>
-            <p>You are currently viewing the Optimized Mode.</p>
-        </header>
+<body class="flexcon">
+  <header>
+    <img src="../../icon.png" alt="SignQuest Logo" class="logo">
+    <h1 class="title"> Introduction </h1>
+  </header>
 
-        <main>
-            <div class="video-screen">
-                <!-- Placeholder for the 800x450 video stream -->
-               <video id="webcam" autoplay playsinline></video>
-            </div>
-            <div class="toggle-buttons">
-                <button id = "startBtn">Start Recording!</button>
-                <button id = "stopBtn">Stop Recording!</button>
-            </div>
-            <div id = "image-container"></div>
-            <div id = "text-container"></div>
-        </main>
-        <script src = "../static/index.js"></script>
+  <div class="main-content">
+    <div class="text-section">
+      <h1>Sign this letter:</h1>
+      <h1>Aa</h1>
+      <button class="start slide-up" id="finish" hidden> Start Practice! </button>
     </div>
+    <div class="right-con">
+      <video class="video" id="webcam" autoplay playsinline>
+      </video>
+      <div class="bar-border" id="progress" hidden>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </div>
+  <script src="asl.js"></script>
 </body>
 </html>

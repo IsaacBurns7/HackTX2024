@@ -17,7 +17,7 @@ async function startWebcam() {
 function onIntroFinish() {
   const body = document.getElementsByClassName("main-content")[0];
   introClick.removeAttribute("hidden");
-  body.style.marginTop = "-10%";
+  body.style.marginTop = "5%";
 }
 
 startWebcam();

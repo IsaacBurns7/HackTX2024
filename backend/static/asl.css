@@ -54,19 +54,23 @@ html, body {
 }
 
 .text-section {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   max-width: 50%;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  transition: 1s ease;
+  margin-bottom: 10%;
 }
 
 .text-section h1 {
-  margin-top: 15%;
+  margin-top: 0%;
   font-size: 4em;
   text-align: center;
   word-wrap: break-word;
   background: #fff;
-  justify-content: center;
-  display: flex;
-  margin-right: 10%;
   background-size: 1000% 1000%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -78,6 +82,8 @@ html, body {
   height: 60vh;
   width: 100%;
   border-radius: 25px;
+  padding: 0;
+  margin-bottom: 0;
   box-sizing: border-box;
   object-fit: cover;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5), 0 8px 22px 0 rgba(0, 0, 0, 0.5);
@@ -85,7 +91,7 @@ html, body {
 
 .bar-border {
   width: 100%;              
-  height: 25px;            
+  height: 1rem;            
   background-color: #e0e0e0; 
   border-radius: 12px; 
   overflow: hidden;        
@@ -104,8 +110,8 @@ html, body {
 .right-con {
   display: flex;
   flex-direction: column;
-  row-gap: 1em;
-  margin-right: 0;
+  row-gap: 1px;
+  margin-right: 5%;
   width: 50%;
 }
 
@@ -138,8 +144,7 @@ html, body {
 }
 
 .slide-up {
-  position: fixed;
-  bottom: 5rem;
+  bottom: 10rem;
   animation: 1s slide-up ease;
 }
 
@@ -148,6 +153,10 @@ html, body {
     bottom: -50px;
   }
   to {
-    bottom: 5rem;
+    bottom: 10rem;
   }
+}
+
+.title {
+  margin-right: 23%;
 }
