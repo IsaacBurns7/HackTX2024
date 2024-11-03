@@ -90,15 +90,16 @@ stopButton.onclick = stopCamera;
 */
 async function read_response_json(jason){
     const body = jason.body;
-    const text = jason.text;
-    const base64String = jason.image;
+    const text = body.text;
+    const base64String = body.image;
 
     const img = new Image();
     img.src = "data:image/png;base64," + base64String;
 
-    //you guys figure out what to do with this image object 
-    //make text object and figureo ut where to put 
+    return [img, text];
 
+    //you guys figure out what to do with this image object 
+    //make text object and figureo ut where to put
 }
 
 function onIntroFinish() {

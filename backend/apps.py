@@ -76,6 +76,10 @@ def handle_upload_video():
     video = request.files['video']
 
     upload_folder = 'uploads'
+    
+    # Check if the folder exists, and if not, create it
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
 
     video_path = os.path.join(upload_folder, video.filename)
     video.save(video_path)
