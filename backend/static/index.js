@@ -146,11 +146,13 @@ async function debug() {
     }, "500")
 
     setTimeout(() => {
-        if(ct == 3){
-            window.location.href += "phrase"
-            return
+        if(ct == 3 && !window.location.href.includes("phrase")){
+            window.location.href += "phrase";
+            return;
         }
-        document.getElementById("process_ltr").innerText = manual[ct]
+        if (!window.location.href.includes("phrase"))
+            document.getElementById("process_ltr").innerText = manual[ct]
+
         document.getElementById("stopBtn").style.backgroundColor = "red";
         document.getElementById("stopBtn").innerText = "Stop";
     }, "2000");
