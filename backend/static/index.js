@@ -76,6 +76,7 @@ document.getElementById('stopBtn').onclick = stopCamera;
 
 //stop here
 
+/*
 function get_image_base64(){
     const prompt = document.getElementById('promptInput').value;
     fetch('/generate-image-base64',{
@@ -109,6 +110,6 @@ function get_image_base64(){
         setTimeout(get_base64_image, 5000); // Adjust the delay as needed
     });
     */
-}
+//}
 
-document.getElementById("generateBtn").onclick = get_image_base64;
+//document.getElementById("generateBtn").onclick = get_image_base64;

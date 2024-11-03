@@ -79,8 +79,9 @@ def handle_upload_video():
 
 #goal: return json object as 
 #{body: {text: "", image: ""}}
-@app.route('/get-image-base64', methods=['POST'])
-def handle_get_image_base64():
+@app.route('/handle-video-to-text-and-image', methods=['POST'])
+def handle_video_to_text_and_image():
+    
     
 
 if __name__ == '__main__':
