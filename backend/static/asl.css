@@ -110,6 +110,7 @@ html, body {
 .right-con {
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 1px;
   margin-right: 5%;
   width: 50%;
@@ -126,11 +127,12 @@ html, body {
   background-color: rgb(182, 133, 255); /* Primary color */
   color: white;
   padding: 12px 24px; /* Spacing */
-  font-size: 16px; /* Text size */
+  font-size: 20px; /* Text size */
   border: none;
   border-radius: 20px; /* Rounded corners */
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; /* Smooth animations */
+  font-family: 'Red Hat Display', sans-serif;
 }
 
 .start:hover {
@@ -159,4 +161,41 @@ html, body {
 
 .title {
   margin-right: 23%;
+}
+
+.button-con {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+
+.button-con > button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slight shadow on hover */
+}
+
+.button-con > button:active {
+  transform: scale(0.97); /* Slight "press" effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Reduced shadow */
+}
+
+.button-con > button {
+  color: white;
+  padding: 12px 24px; /* Spacing */
+  font-size: 20px; /* Text size */
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s; /* Smooth animations */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 35%;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+#startBtn {
+  background-color: rgb(6, 172, 6); /* Primary color */
+}
+
+#stopBtn {
+  background-color: red; /* Primary color */
 }
